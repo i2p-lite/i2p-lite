@@ -68,20 +68,20 @@ set(LIBS "${LIBS} ${CRYPTO_LIB}")
 # openssl implementation of crypto
 file(GLOB LIBOPENSSLCRYPTO_SRC "src/crypto/oepnssl/*.c")
 set(CRYPTOIMPL_OPENSSL i2p_cryptoimpl_openssl)
-add_library(${CRYPTIOIMPL_OPENSSL} ${LIBOPENSSLCRYPTO_SRC})
+add_library(${CRYPTOIMPL_OPENSSL} ${LIBOPENSSLCRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTIOIMPL_OPENSSL}")
 
 # librel cryptoimpl ( depends on libressl, implements crypto )
 # libressl implementation of crypto
 file(GLOB LIBLIBRESSLCRYPTO_SRC "src/crypto/libressl/*c")
 set(CRYPTOIMPL_LIBRESSL i2p_cryptoimpl_libressl)
-add_library(${CRYPTIOIMPL_LIBRESSL} ${LIBLIBRESSLCRYPTO_SRC})
+add_library(${CRYPTOIMPL_LIBRESSL} ${LIBLIBRESSLCRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTOIMPL_LIBRESSL}")
 
 # libnettle cryptoimpl ( depends on libnettle, implements crypto )
 file(GLOB LIBNETTELECRYPTO_SRC "src/crypto/nettle/*.c")
 set(CRYPTOIMPL_NETTLE i2p_cryptoimpl_nettle)
-add_library(${CRYPTIOIMPL_NETTLE} ${LIBNETTELECRYPTO_SRC})
+add_library(${CRYPTOIMPL_NETTLE} ${LIBNETTELECRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTOIMPL_NETTLE}")
 
 # datatypes (standalone)
@@ -101,7 +101,7 @@ set(LIBS "${LIBS} ${NETDB_LIB}")
 # i2np transport (depends on netdb)
 # interface defining sending and receiving i2np messages
 file(GLOB LIBI2NPTRANSPORT_SRC "src/transport/abstract/*.c")
-set(I2NPTRANPORT_LIB i2np_transport)
+set(I2NPTRANSPORT_LIB i2np_transport)
 add_library(${I2NPTRANSPORT_LIB} ${LIBI2NPTRANSPORT_SRC})
 set(LIBS "${LIBS} ${I2NPTRANSPORT_LIB}")
 
@@ -200,8 +200,8 @@ set(LIBS "${LIBS} ${PROFILER_IMPL_LUA}")
 # netdb profiler implementation using mruby scripts
 file(GLOB LIBI2PMRUBYPROFILER_SRC "src/profiler/mruby/*.c")
 set(PROFILER_IMPL_MRUBY i2p_mruby_profiler)
-add_library(${PROFILER_IMPL_MRUBY} ${LIBI2PMRUBYPROFILER_SRC}
-)set(LIBS "${LIBS} ${PROFILER_IMPL_MRUBY}")
+add_library(${PROFILER_IMPL_MRUBY} ${LIBI2PMRUBYPROFILER_SRC})
+set(LIBS "${LIBS} ${PROFILER_IMPL_MRUBY}")
 
 # i2cp protocol ( implements garlic handler )
 # interface defining i2cp message handling
