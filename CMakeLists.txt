@@ -21,72 +21,80 @@ set(MALLOC_LIBRARY -ljemalloc)
 
 include_directories(include)
 
+set(LIBS "")
+
 # ipc (standalone)
 # interface defining inter process communication
 file(GLOB LIBI2PIPC_SRC "src/ipc/*.c")
-set(IPC_LIB i2pipc)
+set(IPC_LIB i2p_ipc)
 add_library(${IPC_LIB} ${LIBI2PIPC_SRC})
 set(LIBS "${LIBS} ${IPC_LIB}")
 
 # i/o (standalone)
 # interface defining async network/file io
 file(GLOB LIBI2PIO_SRC "src/io/*.c")
-set(IO_LIB i2pio)
+set(IO_LIB i2p_io)
 add_library(${IO_LIB} ${LIBI2PIO_SRC})
 set(LIBS "${LIBS} ${IO_LIB}")
 
 # threadpool (standalone)
 # interface defining thread pooling
 file(GLOB LIBI2PTHREAD_SRC "src/threadpool/*.c")
-set(THREAD_LIB i2pthread)
+set(THREAD_LIB i2p_thread)
 add_library(${THREAD_LIB} ${LIBI2PTHREAD_SRC})
 set(LIBS "${LIBS} ${THREAD_LIB}")
+
+# misc utilities (standalone)
+file(GLOB LIBUTILS_SRC "src/util/*.c")
+set(UTIL_LIB i2p_util)
+add_library(${UTIL_LIB} ${LIBUTILS_SRC})
+set(LIBS "${LIBS} ${UITL_LIB}")
 
 # libuv glue layer (depends on libuv)
 # threadpool, ipc and i/o implementation using libuv
 file(GLOB LIBI2PUV_SRC "src/libuv/*.c")
-set(UVGLUE_LIB i2puv)
+set(UVGLUE_LIB i2p_uv)
 add_library(${UVGLUE_LIB} ${LIBI2PUV_SRC})
 set(LIBS "${LIBS} ${UVGLUE_LIB}")
 
 # crypto (depends on threadpool and ipc)
 # interface for threadpooled async i2p cryptography implementation
 file(GLOB LIBI2PCRYPTO_SRC "src/crypto/*.c")
-set(CRYPTO_LIB i2pcrypto)
+set(CRYPTO_LIB i2p_crypto)
 add_library(${CRYPTO_LIB} ${LIBI2PCRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTO_LIB}")
 
 # openssl cryptoimpl ( depends on openssl, implements crypto )
 # openssl implementation of crypto
 file(GLOB LIBOPENSSLCRYPTO_SRC "src/crypto/oepnssl/*.c")
-set(CRYPTOIMPL_OPENSSL i2pcryptoimpl_openssl)
+set(CRYPTOIMPL_OPENSSL i2p_cryptoimpl_openssl)
 add_library(${CRYPTIOIMPL_OPENSSL} ${LIBOPENSSLCRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTIOIMPL_OPENSSL}")
 
 # librel cryptoimpl ( depends on libressl, implements crypto )
 # libressl implementation of crypto
 file(GLOB LIBLIBRESSLCRYPTO_SRC "src/crypto/libressl/*c")
-set(CRYPTOIMPL_LIBRESSL i2pcryptoimpl_libressl)
+set(CRYPTOIMPL_LIBRESSL i2p_cryptoimpl_libressl)
 add_library(${CRYPTIOIMPL_LIBRESSL} ${LIBLIBRESSLCRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTOIMPL_LIBRESSL}")
 
 # libnettle cryptoimpl ( depends on libnettle, implements crypto )
 file(GLOB LIBNETTELECRYPTO_SRC "src/crypto/nettle/*.c")
-set(CRYPTOIMPL_NETTLE i2pcryptoimpl_nettle)
+set(CRYPTOIMPL_NETTLE i2p_cryptoimpl_nettle)
 add_library(${CRYPTIOIMPL_NETTLE} ${LIBNETTELECRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTOIMPL_NETTLE}")
 
 # datatypes (standalone)
 # i2p data structures
 file(GLOB LIBI2PDATATYPES_SRC "src/datatypes/*.c")
-set(DATA_LIB i2pdata)
+set(DATA_LIB i2p_data)
 add_library(${DATA_LIB} ${LIBI2PDATATYPES_SRC})
 set(LIBS "${LIBS} ${DATA_LIB}")
 
 # netdb (depends on ipc, datatypes and crypto)
 # local netdb i/o
 file(GLOB LIBI2PNETDB_SRC "src/netdb/*.c")
-set(NETDB_LIB i2pnetdb)
+set(NETDB_LIB i2p_netdb)
 add_library(${NETDB_LIB} ${LIBI2PNETDB_SRC})
 set(LIBS "${LIBS} ${NETDB_LIB}")
 

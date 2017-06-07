@@ -35,6 +35,7 @@ Non Functional work-in-progress, come back in a year or two for something seriou
 * CMake 3.x
 * libuv 1.x
 * libssl 1.x
+* jemalloc
 
 ## Supported Platforms
 
