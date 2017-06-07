@@ -66,7 +66,7 @@ set(LIBS "${LIBS} ${CRYPTO_LIB}")
 
 # openssl cryptoimpl ( depends on openssl, implements crypto )
 # openssl implementation of crypto
-file(GLOB LIBOPENSSLCRYPTO_SRC "src/crypto/oepnssl/*.c")
+file(GLOB LIBOPENSSLCRYPTO_SRC "src/crypto/openssl/*.c")
 set(CRYPTOIMPL_OPENSSL i2p_cryptoimpl_openssl)
 add_library(${CRYPTOIMPL_OPENSSL} ${LIBOPENSSLCRYPTO_SRC})
 set(LIBS "${LIBS} ${CRYPTIOIMPL_OPENSSL}")
