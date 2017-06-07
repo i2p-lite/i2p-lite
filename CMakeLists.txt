@@ -13,7 +13,7 @@ pkg_check_modules(UV libuv)
 pkg_check_modules(OPENSSL openssl)
 
 include_directories(${UV_INCLUDEDIR})
-include_directories(${OPENSSL_INCLUEDIR})
+include_directories(${OPENSSL_INCLUDEDIR})
 
 
 set(MALLOC_LIBRARY -ljemalloc)
