@@ -31,7 +31,7 @@ add_library(${IPC_LIB} ${LIBI2PIPC_SRC})
 set(LIBS "${LIBS} ${IPC_LIB}")
 
 # i/o (standalone)
-# interface defining async network/file io
+# interface defining async i/o api
 file(GLOB LIBI2PIO_SRC "src/io/*.c")
 set(IO_LIB i2p_io)
 add_library(${IO_LIB} ${LIBI2PIO_SRC})
@@ -50,8 +50,14 @@ set(UTIL_LIB i2p_util)
 add_library(${UTIL_LIB} ${LIBUTILS_SRC})
 set(LIBS "${LIBS} ${UITL_LIB}")
 
+# memory management utilities (depends on jemalloc)
+file(GLOB LIBI2PMEM_SRC "src/memory/*.c")
+set(MEM_LIB i2p_mem)
+add_library(${MEM_LIB} ${LIBI2PMEM_SRC})
+set(LIBS "${LIBS} ${MEM_LIB}")
+
 # libuv glue layer (depends on libuv)
-# threadpool, ipc and i/o implementation using libuv
+# threadpool, ipc and async i/o implementation using libuv
 file(GLOB LIBI2PUV_SRC "src/libuv/*.c")
 set(UVGLUE_LIB i2p_uv)
 add_library(${UVGLUE_LIB} ${LIBI2PUV_SRC})
