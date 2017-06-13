@@ -7,6 +7,8 @@ I2P Network protocol implementation in C99
 
 Non Functional work-in-progress, come back in a year or two for something serious.
 
+See the project roadmap [here](ROADMAP.md)
+
 ## Project Outline
 
 **(goal):** Full Interoperation with mainline I2P Network.
