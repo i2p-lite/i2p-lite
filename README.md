@@ -1,6 +1,6 @@
 # i2p-lite
 
-I2P Network protocol implementation in C99
+I2P Network protocol implementation in C11
 
 
 ## Status
