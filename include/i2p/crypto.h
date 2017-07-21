@@ -1,8 +1,10 @@
 #ifndef I2P_CRYPTO_H
 #define I2P_CRYPTO_H
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <i2p/ipc.h>
+#include <i2p/memory.h>
 
 /** elgamal key buffer */
 typedef uint8_t elg_keybuffer[256];
@@ -33,8 +35,9 @@ struct sha256_op
   void * userdata;
   uint8_t * buff;
   size_t sz;
+  sha256_digest_t digest;
   struct i2p_ipc * caller;
-  void (*result)(struct sha256_op *, sha256_digest_t);
+  void (*result)(struct sha256_op *);
 };
 
 /** sha1 hash digest */
@@ -46,8 +49,9 @@ struct sha1_op
   void * userdata;
   uint8_t * buff;
   size_t sz;
+  sha1_digest_t digest;
   struct i2p_ipc * caller;
-  void (*result)(struct sha1_op *, sha1_digest_t);
+  void (*result)(struct sha1_op *);
 };
 
 /** tunnel data message buffer */
@@ -78,8 +82,9 @@ struct dh_op
   void * userdata;
   elg_keybuffer priv;
   elg_keybuffer pub;
+  elg_keybuffer shared;
   struct i2p_ipc * caller;
-  void (*result)(struct dh_op *, elg_keybuffer);
+  void (*result)(struct dh_op *);
 };
 
 /** dsa privatey key buffer */
@@ -163,6 +168,6 @@ struct i2p_crypto
 };
 
 
-void i2p_crypto_openssl(struct i2p_crypto *, struct i2p_ipc *, struct i2p_allocator *);
+void i2p_crypto_openssl_singlethreaded(struct i2p_crypto *, struct i2p_allocator *);
 
 #endif

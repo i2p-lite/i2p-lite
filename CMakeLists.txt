@@ -23,27 +23,6 @@ include_directories(include)
 
 set(LIBS "")
 
-# ipc (standalone)
-# interface defining inter process communication
-file(GLOB LIBI2PIPC_SRC "src/ipc/*.c")
-set(IPC_LIB i2p_ipc)
-add_library(${IPC_LIB} ${LIBI2PIPC_SRC})
-set(LIBS "${LIBS} ${IPC_LIB}")
-
-# i/o (standalone)
-# interface defining async i/o api
-file(GLOB LIBI2PIO_SRC "src/io/*.c")
-set(IO_LIB i2p_io)
-add_library(${IO_LIB} ${LIBI2PIO_SRC})
-set(LIBS "${LIBS} ${IO_LIB}")
-
-# threadpool (standalone)
-# interface defining thread pooling
-file(GLOB LIBI2PTHREAD_SRC "src/threadpool/*.c")
-set(THREAD_LIB i2p_thread)
-add_library(${THREAD_LIB} ${LIBI2PTHREAD_SRC})
-set(LIBS "${LIBS} ${THREAD_LIB}")
-
 # misc utilities (standalone)
 file(GLOB LIBUTILS_SRC "src/util/*.c")
 set(UTIL_LIB i2p_util)
@@ -55,13 +34,6 @@ file(GLOB LIBI2PMEM_SRC "src/memory/*.c")
 set(MEM_LIB i2p_mem)
 add_library(${MEM_LIB} ${LIBI2PMEM_SRC})
 set(LIBS "${LIBS} ${MEM_LIB}")
-
-# libuv glue layer (depends on libuv)
-# threadpool, ipc and async i/o implementation using libuv
-file(GLOB LIBI2PUV_SRC "src/libuv/*.c")
-set(UVGLUE_LIB i2p_uv)
-add_library(${UVGLUE_LIB} ${LIBI2PUV_SRC})
-set(LIBS "${LIBS} ${UVGLUE_LIB}")
 
 # crypto (depends on threadpool and ipc)
 # interface for threadpooled async i2p cryptography implementation
