@@ -1,4 +1,5 @@
 #include <i2p/cryptoimpl/openssl.h>
+#include <openssl/ssl.h>
 
 const uint8_t elgp_[256] = {
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xC9, 0x0F, 0xDA, 0xA2, 0x21, 0x68, 0xC2, 0x34,
@@ -31,7 +32,7 @@ void i2p_crypto_openssl_singlethreaded(struct i2p_crypto * crypto, struct i2p_al
   crypto->elg_decrypt = i2p_openssl_elg_decrypt;
 
 
-
+  SSL_library_init();
 
   impl->elgp = BN_new();
   BN_bin2bn(elgp_, 256, impl->elgp);
