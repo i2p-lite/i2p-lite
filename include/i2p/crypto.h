@@ -167,7 +167,4 @@ struct i2p_crypto
   void (*eddsa_sha512_verify)(struct i2p_crypto *, struct eddsa_verify_op *);
 };
 
-
-void i2p_crypto_openssl_singlethreaded(struct i2p_crypto *, struct i2p_allocator *);
-
 #endif

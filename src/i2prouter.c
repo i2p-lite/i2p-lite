@@ -1,4 +1,5 @@
 #include <i2p/crypto.h>
+#include <i2p/cryptoimpl/openssl.h>
 #include <i2p/memory.h>
 
 int main(int argc, char * argv[])
