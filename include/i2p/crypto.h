@@ -10,10 +10,13 @@
 typedef uint8_t elg_keybuffer[256];
 
 /** elgamal data buffer for normal elgamal */
-typedef uint8_t elg_buffer[255];
+typedef uint8_t elg_buffer[222];
 
 /** elgamal data buffer for zeropadded elgamal */
 typedef uint8_t elg_zeropad_buffer[514];
+
+/** elgamal data buffer for nonpadded elgamal */
+typedef uint8_t elg_nopad_buffer[512];
 
 /** encrypt/decrypt in place with elgamal event */
 struct elg_op
@@ -21,7 +24,8 @@ struct elg_op
   void * userdata;
   elg_keybuffer key;
   elg_buffer buff;
-  elg_zeropad_buffer zp_buff;
+  elg_nopad_buffer result_buff;
+  elg_zeropad_buffer zp_result_buff;
   struct i2p_ipc * caller;
   void (*result)(struct elg_op *);
 };

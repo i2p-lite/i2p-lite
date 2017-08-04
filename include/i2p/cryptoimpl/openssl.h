@@ -18,4 +18,6 @@ void i2p_openssl_elg_encrypt(struct i2p_crypto *, struct elg_op *);
 void i2p_openssl_elg_decrypt(struct i2p_crypto *, struct elg_op *);
 
 
+int bn2buf(BIGNUM *, uint8_t *, size_t);
+
 #endif
