@@ -155,8 +155,10 @@ struct i2p_crypto
   /** private implementation */
   void * impl;
 
-  void (*elg_encrypt)(struct i2p_crypto *, struct elg_op *, int);
-  void (*elg_decrypt)(struct i2p_crypto *, struct elg_op *, int);
+  void (*elg_encrypt)(struct i2p_crypto *, struct elg_op *);
+  void (*elg_decrypt)(struct i2p_crypto *, struct elg_op *);
+  void (*elg_encrypt_padded)(struct i2p_crypto *, struct elg_op *);
+  void (*elg_decrypt_padded)(struct i2p_crypto *, struct elg_op *);
   void (*sha256)(struct i2p_crypto *, struct sha256_op *);
   void (*sha1)(struct i2p_crypto *, struct sha1_op *);
   void (*tunnel_encrypt)(struct i2p_crypto *, struct aes_tunnel_op *);
