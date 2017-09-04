@@ -30,9 +30,9 @@ void i2p_openssl_elg_encrypt(struct i2p_crypto * crypto, struct elg_op * op)
   // copy message in
   uint8_t m[255];
   m[0] = 0xff;
-  memcpy(m+33, op->buff, 222);
+  memcpy(m+33, op->buff, ELG_PLAINTEXT_SIZE);
   // hash it
-  SHA256(m+33, sizeof(op->buff), m + 1);
+  SHA256(m+33, ELG_PLAINTEXT_SIZE, m + 1);
   // calc b = b1*m % p
   BN_bin2bn(m, 255, b);
   BN_mod_mul(b, b1, b, impl->elgp, ctx);
@@ -64,7 +64,7 @@ void i2p_openssl_elg_decrypt(struct i2p_crypto * crypto, struct elg_op * op)
   bn2buf (b, m, 255);
   BN_CTX_free (ctx);
   uint8_t hash[32];
-  SHA256 (m + 33, 222, hash);
+  SHA256 (m + 33, ELG_PLAINTEXT_SIZE, hash);
   if (memcmp (m + 1, hash, 32))
 	{
     /* fail decrypt */
@@ -73,7 +73,7 @@ void i2p_openssl_elg_decrypt(struct i2p_crypto * crypto, struct elg_op * op)
   else
   {
     op->success = 1;
-    memcpy (op->buff, m + 33, 222);
+    memcpy (op->buff, m + 33, ELG_PLAINTEXT_SIZE);
   }
   if(op->result)
   {

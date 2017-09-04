@@ -6,6 +6,8 @@
 #include <i2p/ipc.h>
 #include <i2p/memory.h>
 
+#define ELG_PLAINTEXT_SIZE 222
+
 /** elgamal key buffer */
 typedef uint8_t elg_keybuffer[256];
 

@@ -30,7 +30,8 @@ void i2p_crypto_openssl_singlethreaded(struct i2p_crypto * crypto, struct i2p_al
 
   crypto->elg_encrypt = i2p_openssl_elg_encrypt;
   crypto->elg_decrypt = i2p_openssl_elg_decrypt;
-
+  crypto->elg_keygen = i2p_openssl_elg_keygen;
+  crypto->randbytes = i2p_openssl_randbytes;
 
   SSL_library_init();
 
