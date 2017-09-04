@@ -14,6 +14,7 @@ int main(int argc, char * argv[])
   struct i2p_crypto * crypto;
   crypto = &ctx.crypto;
 
+  /** elg keygen */
   struct elg_keygen_op keygen = {
     .userdata = NULL,
     .result = NULL,
@@ -30,13 +31,10 @@ int main(int argc, char * argv[])
     .key = {0},
     .buff = {0}
   };
-
-  elg_buffer buff = {0};
   /** randomize payload */
-  crypto->randbytes(crypto, buff, ELG_PLAINTEXT_SIZE);
+  crypto->randbytes(crypto, elg.buff, ELG_PLAINTEXT_SIZE);
   /** copy pubkey */
   memcpy(elg.key, keygen.pub, sizeof(elg_keybuffer));
-  memcpy(elg.buff, buff, sizeof(elg_buffer));
 
   /** encrypt */
   crypto->elg_encrypt(crypto, &elg);
