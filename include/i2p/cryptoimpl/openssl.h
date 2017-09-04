@@ -16,7 +16,8 @@ struct i2p_cryptoimpl_openssl_st
 
 void i2p_openssl_elg_encrypt(struct i2p_crypto *, struct elg_op *);
 void i2p_openssl_elg_decrypt(struct i2p_crypto *, struct elg_op *);
-
+void i2p_openssl_elg_keygen(struct i2p_crypto *, struct elg_keygen_op *);
+void i2p_openssl_randbytes(struct i2p_crypto *, uint8_t *, size_t);
 
 int bn2buf(BIGNUM *, uint8_t *, size_t);
 

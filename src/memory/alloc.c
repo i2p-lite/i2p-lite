@@ -14,7 +14,7 @@ void * i2p_alloc(struct i2p_allocator * a, size_t sz)
 
 void i2p_free(struct i2p_allocator * a, void * ptr)
 {
-  free(ptr);
+  if(ptr) free(ptr);
 }
 
 void i2p_allocator_init(struct i2p_allocator * api)

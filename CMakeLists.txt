@@ -1,6 +1,8 @@
 cmake_minimum_required( VERSION 2.8.12 )
 cmake_policy( VERSION 2.8.12)
 
+enable_testing()
+
 set(EXE i2prouter)
 
 find_package(PkgConfig)
@@ -232,10 +234,10 @@ set(LIBS ${LIBS} ${CRYPTOIMPL_OPENSSL})
 
 # i2p client context ( depends on ipc, i2p router context and garlic destination )
 # destination and router context bridge layer
-#file(GLOB LIBI2PCONTEXT "src/context/*.c")
-#set(I2PCONTEXT_LIB i2p_context)
-#add_library(${I2PCONTEXT_LIB} ${LIBI2PCONTEXT_SRC})
-#set(LIBS "${LIBS} ${I2PCONTEXT_LIB}")
+file(GLOB I2PCONTEXT_SRC "src/context/*.c")
+set(I2PCONTEXT_LIB i2p_context)
+add_library(${I2PCONTEXT_LIB} ${I2PCONTEXT_SRC})
+set(LIBS ${I2PCONTEXT_LIB} ${LIBS})
 
 # i2p router executable (depends on libuv glue layer, crypto, i2p router context and i2p client context )
 add_executable(${EXE} "src/i2prouter.c")
@@ -244,3 +246,5 @@ set(LIBS "${LIBS}" ${UV_LIBRARIES} ${OPENSSL_LIBRARIES} ${MALLOC_LIBRARY})
 target_link_libraries(${EXE} ${LIBS})
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
+
+add_subdirectory(test)
