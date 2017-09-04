@@ -66,17 +66,17 @@ set(LIBS ${LIBS} ${CRYPTOIMPL_OPENSSL})
 
 # datatypes (standalone)
 # i2p data structures
-#file(GLOB LIBI2PDATATYPES_SRC "src/datatypes/*.c")
-#set(DATA_LIB i2p_data)
-#add_library(${DATA_LIB} ${LIBI2PDATATYPES_SRC})
-#set(LIBS "${LIBS} ${DATA_LIB}")
+file(GLOB LIBI2PDATATYPES_SRC "src/datatypes/*.c")
+set(DATA_LIB i2p_data)
+add_library(${DATA_LIB} ${LIBI2PDATATYPES_SRC})
+set(LIBS ${LIBS} ${DATA_LIB})
 
 # netdb (depends on ipc, datatypes and crypto)
 # local netdb i/o
-#file(GLOB LIBI2PNETDB_SRC "src/netdb/*.c")
-#set(NETDB_LIB i2p_netdb)
-#add_library(${NETDB_LIB} ${LIBI2PNETDB_SRC})
-#set(LIBS "${LIBS} ${NETDB_LIB}")
+file(GLOB LIBI2PNETDB_SRC "src/netdb/*.c")
+set(NETDB_LIB i2p_netdb)
+add_library(${NETDB_LIB} ${LIBI2PNETDB_SRC})
+set(LIBS ${LIBS} ${NETDB_LIB})
 
 # i2np transport (depends on netdb)
 # interface defining sending and receiving i2np messages
