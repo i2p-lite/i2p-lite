@@ -17,7 +17,7 @@ struct i2p_netdb
   {
     fs::create_directories(rootdir);
     for (const char ch : "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890-~")
-      if(!fs::create_directory(rootdir / fs::path("r"+std::to_string(ch)))) return false;
+      if(!fs::create_directory(rootdir / fs::path("r"+std::string(&ch,1)))) return false;
     return fs::exists(rootdir);
   }
 
