@@ -1,6 +1,6 @@
 # i2p-lite
 
-I2P Network protocol implementation in C11
+I2P Network protocol implementation in C++17 with C89 compatble api 
 
 
 ## Status
@@ -33,10 +33,10 @@ See the project roadmap [here](ROADMAP.md)
 
 ## Requirements
 
-* C11 compatible compiler
+* C++17 compatible compiler
 * CMake 3.x
 * libuv 1.x
-* libssl 1.x
+* libssl 1.1.x
 * jemalloc
 
 ## Supported Platforms
