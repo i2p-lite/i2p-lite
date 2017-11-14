@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <i2p/ipc.h>
 #include <i2p/memory.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define ELG_PLAINTEXT_SIZE 222
 
@@ -170,5 +173,9 @@ struct i2p_crypto
   void (*eddsa_sha512_sign)(struct i2p_crypto *, struct eddsa_sign_op *);
   void (*eddsa_sha512_verify)(struct i2p_crypto *, struct eddsa_verify_op *);
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

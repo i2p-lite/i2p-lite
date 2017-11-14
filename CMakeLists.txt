@@ -9,7 +9,8 @@ find_package(PkgConfig)
 include(FindPackageHandleStandardArgs)
 include(GNUInstallDirs)
 
-set(CMAKE_C_FLAGS "-g")
+set(CMAKE_C_FLAGS "-g -std=gnu11")
+set(CMAKE_CXX_FLAGS "-g -std=c++17")
 
 pkg_check_modules(UV libuv)
 pkg_check_modules(OPENSSL openssl)
@@ -26,27 +27,27 @@ include_directories(include)
 set(LIBS "")
 
 # misc utilities (standalone)
-file(GLOB LIBUTILS_SRC "src/util/*.c")
+file(GLOB LIBUTILS_SRC "src/util/*.cpp" "src/util/*.c")
 set(UTIL_LIB i2p_util)
 add_library(${UTIL_LIB} ${LIBUTILS_SRC})
 set(LIBS ${LIBS} ${UITL_LIB})
 
 # memory management utilities (depends on jemalloc)
-file(GLOB LIBI2PMEM_SRC "src/memory/*.c")
+file(GLOB LIBI2PMEM_SRC "src/memory/*.c" "src/memory/*.cpp")
 set(MEM_LIB i2p_mem)
 add_library(${MEM_LIB} ${LIBI2PMEM_SRC})
 set(LIBS ${LIBS} ${MEM_LIB})
 
 # crypto (depends on threadpool and ipc)
 # interface for threadpooled async i2p cryptography implementation
-file(GLOB LIBI2PCRYPTO_SRC "src/crypto/*.c")
+file(GLOB LIBI2PCRYPTO_SRC "src/crypto/*.cpp" "src/crypto/*.c")
 set(CRYPTO_LIB i2p_crypto)
 add_library(${CRYPTO_LIB} ${LIBI2PCRYPTO_SRC})
 set(LIBS ${LIBS} ${CRYPTO_LIB})
 
 # openssl cryptoimpl ( depends on openssl, implements crypto )
 # openssl implementation of crypto
-file(GLOB LIBOPENSSLCRYPTO_SRC "src/crypto/openssl/*.c")
+file(GLOB LIBOPENSSLCRYPTO_SRC "src/crypto/openssl/*.c" "src/crypto/openssl/*.cpp")
 set(CRYPTOIMPL_OPENSSL i2p_cryptoimpl_openssl)
 add_library(${CRYPTOIMPL_OPENSSL} ${LIBOPENSSLCRYPTO_SRC})
 set(LIBS ${LIBS} ${CRYPTOIMPL_OPENSSL})
@@ -64,19 +65,20 @@ set(LIBS ${LIBS} ${CRYPTOIMPL_OPENSSL})
 #add_library(${CRYPTOIMPL_NETTLE} ${LIBNETTELECRYPTO_SRC})
 #set(LIBS "${LIBS} ${CRYPTOIMPL_NETTLE}")
 
-# datatypes (standalone)
-# i2p data structures
-file(GLOB LIBI2PDATATYPES_SRC "src/datatypes/*.c")
-set(DATA_LIB i2p_data)
-add_library(${DATA_LIB} ${LIBI2PDATATYPES_SRC})
-set(LIBS ${LIBS} ${DATA_LIB})
 
 # netdb (depends on ipc, datatypes and crypto)
 # local netdb i/o
-file(GLOB LIBI2PNETDB_SRC "src/netdb/*.c")
+file(GLOB LIBI2PNETDB_SRC "src/netdb/*.c" "src/netdb/*.cpp")
 set(NETDB_LIB i2p_netdb)
 add_library(${NETDB_LIB} ${LIBI2PNETDB_SRC})
 set(LIBS ${LIBS} ${NETDB_LIB})
+
+# datatypes (standalone)
+# i2p data structures
+file(GLOB LIBI2PDATATYPES_SRC "src/datatypes/*.cpp" "src/datatypes/*.c")
+set(DATA_LIB i2p_data)
+add_library(${DATA_LIB} ${LIBI2PDATATYPES_SRC})
+set(LIBS ${LIBS} ${DATA_LIB})
 
 # i2np transport (depends on netdb)
 # interface defining sending and receiving i2np messages
@@ -234,15 +236,17 @@ set(LIBS ${LIBS} ${NETDB_LIB})
 
 # i2p client context ( depends on ipc, i2p router context and garlic destination )
 # destination and router context bridge layer
-file(GLOB I2PCONTEXT_SRC "src/context/*.c")
+file(GLOB I2PCONTEXT_SRC "src/context/*.cpp")
 set(I2PCONTEXT_LIB i2p_context)
 add_library(${I2PCONTEXT_LIB} ${I2PCONTEXT_SRC})
 set(LIBS ${I2PCONTEXT_LIB} ${LIBS})
 
 # i2p router executable (depends on libuv glue layer, crypto, i2p router context and i2p client context )
-add_executable(${EXE} "src/i2prouter.c")
+add_executable(${EXE} "src/i2prouter.cpp")
 
-set(LIBS "${LIBS}" ${UV_LIBRARIES} ${OPENSSL_LIBRARIES} ${MALLOC_LIBRARY})
+set(FS_LIB stdc++fs)
+
+set(LIBS "${LIBS}" ${UV_LIBRARIES} ${OPENSSL_LIBRARIES} ${MALLOC_LIBRARY} ${FS_LIB})
 target_link_libraries(${EXE} ${LIBS})
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")

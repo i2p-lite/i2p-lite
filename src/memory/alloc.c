@@ -2,23 +2,26 @@
 #include <jemalloc/jemalloc.h>
 
 
-struct i2p_alloc_impl
+struct i2p_allocator
 {
   int unused;
 };
 
 void * i2p_alloc(struct i2p_allocator * a, size_t sz)
 {
+  (void) a;
   return mallocx(sz, MALLOCX_ZERO);
 }
 
 void i2p_free(struct i2p_allocator * a, void * ptr)
 {
+  (void) a;
   if(ptr) free(ptr);
 }
 
-void i2p_allocator_init(struct i2p_allocator * api)
+struct i2p_allocator i2p_alloc_api;
+
+void i2p_allocator_init(struct i2p_allocator ** api)
 {
-  api->alloc = i2p_alloc;
-  api->free = i2p_free;
+  *api = &i2p_alloc_api;
 }

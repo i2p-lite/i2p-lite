@@ -1,16 +1,20 @@
 #ifndef I2P_MEMORY_H
 #define I2P_MEMORY_H
 #include <stdlib.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/** i2p memory allocator interface */
-struct i2p_allocator
-{
-  void * impl;
-  void * (*alloc)(struct i2p_allocator *, size_t);
-  void (*free)(struct i2p_allocator *, void *);
-};
+struct i2p_allocator;
 
-/** init function pointers into i2p allocator */
-void i2p_allocator_init(struct i2p_allocator *);
+void i2p_allocator_init(struct i2p_allocator **);
 
+void * i2p_alloc(struct i2p_allocator *, size_t sz);
+void i2p_free(struct i2p_allocator *, void * );
+  
+#ifdef __cplusplus
+}
+#endif
+
+  
 #endif

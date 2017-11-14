@@ -25,7 +25,7 @@ const int elgg_ = 2;
 void i2p_crypto_openssl_singlethreaded(struct i2p_crypto * crypto, struct i2p_allocator * alloc)
 {
   struct i2p_cryptoimpl_openssl_st * impl = NULL;
-  impl = alloc->alloc(alloc, sizeof(struct i2p_cryptoimpl_openssl_st));
+  impl = i2p_alloc(alloc, sizeof(struct i2p_cryptoimpl_openssl_st));
   impl->alloc = alloc;
 
   crypto->elg_encrypt = i2p_openssl_elg_encrypt;

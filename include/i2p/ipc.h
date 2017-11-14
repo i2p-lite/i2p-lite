@@ -1,6 +1,9 @@
 #ifndef I2P_IPC_H
 #define I2P_IPC_H
 // provides an inter process communication api so that components can talk to each other
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 struct i2p_ipc_api;
@@ -55,4 +58,7 @@ struct i2p_ipc_api
 
 };
 
+#ifdef __cplusplus
+}
+#endif
 #endif

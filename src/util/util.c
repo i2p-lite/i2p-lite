@@ -11,7 +11,7 @@ struct i2p_zlib
 
 void i2p_zlib_init(struct i2p_zlib ** z, struct i2p_allocator * mem)
 {
-  (*z) = (struct i2p_zlib *) mem->alloc(mem, sizeof(struct i2p_zlib));
+  (*z) = (struct i2p_zlib *) i2p_alloc(mem, sizeof(struct i2p_zlib));
   inflateInit2(&(*z)->z, MAX_WBITS + 16);
   (*z)->mem = mem;
 }
@@ -20,7 +20,7 @@ void i2p_zlib_free(struct i2p_zlib ** z)
 {
   struct i2p_allocator * mem = (*z)->mem;
   inflateEnd(&(*z)->z);
-  mem->free(mem, (*z));
+  i2p_free(mem, (*z));
   *z = NULL;
 }
 

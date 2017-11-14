@@ -1,5 +1,8 @@
 #ifndef I2P_IO_H
 #define I2P_IO_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef MAX_HOSTNAME_LEN
 #define MAX_HOSTNAME_LEN 256
@@ -96,6 +99,10 @@ struct i2p_netio_api
   struct i2p_net_io * (*alloc)(struct i2p_netio_api *);
   void (*free)(struct i2p_netio_api *, struct i2p_net_io **);
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif
